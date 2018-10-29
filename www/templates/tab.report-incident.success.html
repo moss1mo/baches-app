@@ -1,0 +1,40 @@
+<ion-view>
+  <ion-nav-title>
+    <img src="img/header.png"/>
+  </ion-nav-title>
+  <ion-content class="padding has-header">
+    <div class="page-wrapper">
+      <div class="page-element-wrapper" style="height: 10% !important;" ng-if="userDetail.role == 'ciudadano'">
+        <img src="img/boton_return_success.png" style="max-height: 100%; max-width: 100%; vertical-align:middle; display:block; margin:auto;" ng-click="newIncident()" />
+      </div>
+
+      <div class="page-element-wrapper" style="height: 10% !important;" ng-if="userDetail.role == 'supervisor'">
+        <img src="img/boton_return_success.png" style="max-height: 100%; max-width: 100%; vertical-align:middle; display:block; margin:auto;" ng-click="newReportarBache()"/>
+      </div>
+      <div class="page-element-wrapper" style="height: 90% !important;">
+        <div class="card">
+          <div class="item item-thumbnail-left item-stable">
+            <img ng-src="{{thumbnailImgSrc}}">
+            <h2>{{reporteIncidentStateData.savedReporteIncidente.place.title}}</h2>
+            <p>{{reporteIncidentStateData.savedReporteIncidente.description}}</p>
+          </div>
+
+          <div class="item item-body" ng-if="userDetail.role == 'ciudadano'">
+            <b>Agradecemos tu apoyo, el reporte será enviado a la unidad correspondiente.</b>
+
+          </div>
+          <div class="item item-body" ng-if="userDetail.role == 'supervisor'">
+            <b>Gracias por el reporte de bache reparado.</b>
+
+          </div>
+
+          <div class="item item-body">
+            <a href="#" ng-click="toggleImgSrc()">
+              <img style="max-width:100%; max-height:100%; display:block; margin:0 auto;" ng-src="{{mainImgSrc}}">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

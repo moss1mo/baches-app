@@ -1,0 +1,312 @@
+<ion-view>
+  <ion-nav-title style="line-height:32px;">
+   
+    <span style="color: white;margin-top: -3px;float: left;margin-left: 0px;font-size: 16px;">Bienvenido:
+    <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{userDetail.name}}</span>
+
+      <img   style="float: right;margin-left: 10px;margin-top: 3px;" src="img/logo_bapp.png"/>
+  
+  </ion-nav-title>
+  <ion-header-bar class="bar-stable bar-subheader">
+    <a class="button button-icon icon ion-android-menu" ng-click="openPopover($event)">
+      <span style="text-align: right;">
+       &nbsp;&nbsp;&nbsp;&nbsp;Baches App {{userDetail.role == 'ciudadano' ? 'México' : 'Supervisor'}}
+       
+      </span>
+    </a>
+  </ion-header-bar>
+  <ion-content class="has-subheader" overflow-scroll="true">
+    <div id="reportar_ciudadano" class="page-wrapper" style="background-color: black;" ng-if="userDetail.role == 'ciudadano'">
+      <div class="page-element-wrapper reportar-bache-bar">
+        <span class="helper"></span>
+        <img src="img/reportar_bache.png" style="max-height: 80%; max-width: 100%; vertical-align:middle;"/>
+      </div>
+      <div class="page-element-wrapper" style="height: 78% !important;">
+        <ui-gmap-google-map center="map.center" zoom="map.zoom" control="map.control"
+          bounds="map.bounds" options="map.options" events="map.map_events" data-tap-disabled="true">
+          <ui-gmap-map-control template="map_control.html" position="top-right"
+            index="-1" controller="GmapControlCtrl">
+          </ui-gmap-map-control>
+          <ui-gmap-marker coords="incidenteMarker" idKey="incidenteMarker.id"
+            options="incidenteMarker.options" events="incidenteMarker.events">
+            <ui-gmap-window show="true" options="gmapWindowOptions" ng-cloak>
+                {{reporteIncidente.place.title}}
+            </ui-gmap-window>
+          </ui-gmap-marker>
+        </ui-gmap-google-map>
+      </div>
+      <div class="page-element-wrapper" style="background-color: #303030; height: 11% !important;">
+        <span class="helper"></span>
+        <img src="img/botonenvia.png" style="max-height: 85%; max-width: 100%; vertical-align:middle;" ng-click="askTakePhoto()"/>
+      </div>
+    </div>
+
+    <div id="anuncio_ciudadano" class="page-wrapper" style="background-color: white;" ng-if="userDetail.role == 'ciudadano'">
+      <div class="page-element-wrapper reportar-bache-bar">
+        <span class="helper"></span>
+        <img src="img/anuncios_bar.png" style="max-height: 80%; max-width: 100%; vertical-align:middle;"/>
+      </div>
+      <div class="page-element-wrapper" style="height: 59% !important;">
+        <span class="helper"></span>
+        <img ng-src="{{announcement.content_img}}" style="max-height: 90%; max-width: 100%; vertical-align:middle;" ng-click="openAnnouncement()" />
+      </div>
+      <div class="page-element-wrapper" style="height: 23% !important;">
+        <span class="helper"></span>
+        <img src="img/white_half.png" style="max-height: 90%; max-width: 10%; vertical-align:middle;"/>
+        <img src="img/logo_solugob.png" style="max-height: 90%; max-width: 35%; vertical-align:middle;margin-left:5%;" onclick="window.open('http://www.solugob.com.mx', '_system', 'location=yes'); return false;"/>
+        <!--<img src="img/white_half.png" style="max-height: 90%; max-width: 10%; vertical-align:middle;"/>-->
+        <img src="img/logo_roadpatch.png" style="max-height:110%; max-width: 45%; vertical-align:middle;" onclick="window.open('http://roadpatch.mx', '_system', 'location=yes'); return false;"/>
+        <img src="img/white_half.png" style="max-height: 90%; max-width: 10%; vertical-align:middle;"/>
+        <!--img src="img/anuncio_02_b.png" style="max-height: 90%; max-width: 33.33%; vertical-align:middle;" onclick="window.open('http://www.solugob.com.mx', '_system', 'location=yes'); return false;"/-->
+      </div>
+    </div>
+
+    <div id="baches_ciudadano" class="page-wrapper" style="background-color: black;" ng-if="userDetail.role == 'ciudadano'">
+      <div class="page-element-wrapper reportar-bache-bar">
+        <span class="helper"></span>
+        <img src="img/baches_rpt_onrpr_rpr.png" style="max-height: 80%; max-width: 100%; vertical-align:middle;"/>
+      </div>
+      <div class="page-element-wrapper" style="height: 78% !important;">
+        <ui-gmap-google-map center="map.center" zoom="map.zoom" control="map.control" events="map.map_events" bounds="map.bounds" data-tap-disabled="true">
+          <ui-gmap-map-control template="map_control.html" position="top-right"
+            index="-1" controller="GmapControlCtrl">
+          </ui-gmap-map-control>
+          <ui-gmap-markers models="incidentesExistentesMarkers" coords="'self'" icon="'icon'" events="map.marker_events"></ui-gmap-markers>
+        </ui-gmap-google-map>
+      </div>
+      <div class="page-element-wrapper reportar-bache-bar">
+        <span class="helper"></span>
+        <img src="img/www_bar.png" style="max-height: 80%; max-width: 100%; vertical-align:middle;" onclick="window.open('http://www.bachesapp.com', '_system', 'location=yes'); return false;"/>
+      </div>
+    </div>
+
+    <div id="baches_supervisor" class="page-wrapper" style="background-color: black;" ng-if="userDetail.role == 'supervisor'">
+      <div class="page-element-wrapper reportar-bache-bar">
+        <span class="helper"></span>
+        <img src="img/baches_asignados.png" style="max-height: 80%; max-width: 100%; vertical-align:middle;"/>
+      </div>
+      <div class="page-element-wrapper" style="height: 78% !important;">
+        <ui-gmap-google-map center="map.center" zoom="map.zoom" control="map.control" events="map.map_events" bounds="map.bounds" data-tap-disabled="true">
+          <ui-gmap-map-control template="map_control.html" position="top-right"
+            index="-1" controller="GmapControlCtrl">
+          </ui-gmap-map-control>
+          <ui-gmap-markers models="incidentesExistentesMarkers" coords="'self'" icon="'icon'" events="map.marker_events" ></ui-gmap-markers>
+        </ui-gmap-google-map>
+      </div>
+      <div class="page-element-wrapper reportar-bache-bar">
+        <span class="helper"></span>
+      </div>
+    </div>
+
+    <div id="reportar_supervisor" class="page-wrapper" style="background-color: black;" ng-if="userDetail.role == 'supervisor'">
+      <div class="page-element-wrapper reportar-bache-bar">
+        <span class="helper"></span>
+        <img src="img/reporte_bache_reparado.png" style="max-height: 80%; max-width: 100%; vertical-align:middle;"/>
+      </div>
+      <div class="page-element-wrapper" style="height: 78% !important;">
+        <ui-gmap-google-map center="map.center" zoom="map.zoom" control="map.control" events="map.map_events" bounds="map.bounds" options="map.options" data-tap-disabled="true">
+          <ui-gmap-map-control template="map_control.html" position="top-right"
+            index="-1" controller="GmapControlCtrl">
+          </ui-gmap-map-control>
+          <ui-gmap-marker coords="incidenteMarker" idKey="incidenteMarker.id" options="incidenteMarker.options" events="incidenteMarker.events">
+            <ui-gmap-window show="true" options="gmapWindowOptions" ng-cloak>
+                {{reporteIncidente.place.title}}
+            </ui-gmap-window>
+          </ui-gmap-marker>
+        </ui-gmap-google-map>
+      </div>
+      <div class="page-element-wrapper" style="background-color: #303030; height: 11% !important;">
+        <span class="helper"></span>
+        <img src="img/botonenvia.png" style="max-height: 80%; max-width: 100%; vertical-align:middle;" ng-click="markAsReparedDirect()"/>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+
+<script id="actions-popover.html" type="text/ng-template">
+  <ion-popover-view class="mhpopover">
+    <ion-content>
+      <ion-list>
+        <ion-item ng-click="scrollToSection('reportar_supervisor')" href="#" ng-if="userDetail.role == 'supervisor'">
+          Reportar bache
+        </ion-item>
+        <ion-item ng-click="scrollToSection('baches_supervisor')" href="#" ng-if="userDetail.role == 'supervisor'">
+          Baches asignados
+        </ion-item>
+        <ion-item ng-click="scrollToSection('reportar_ciudadano')" href="#" ng-if="userDetail.role == 'ciudadano'">
+          Reportar bache
+        </ion-item>
+        <ion-item ng-click="scrollToSection('anuncio_ciudadano')" href="#" ng-if="userDetail.role == 'ciudadano'">
+          Noticias
+        </ion-item>
+        <ion-item ng-click="scrollToSection('baches_ciudadano')" href="#" ng-if="userDetail.role == 'ciudadano'">
+          Mapa de reportes
+        </ion-item>
+
+        <ion-item ng-click="showOfflineData()" href="#">
+          Datos offline
+        </ion-item>
+        <ion-item ng-click="showSocnetLinks()" href="#" ng-if="userDetail.role == 'ciudadano'">
+          Redes sociales
+        </ion-item>
+        <ion-item ng-click="showTerms()" href="#" ng-if="userDetail.role == 'ciudadano'">
+          Política de privacidad
+        </ion-item>
+        <ion-item ng-click="showContacts()" href="#" ng-if="userDetail.role == 'ciudadano'">
+          Contacto
+        </ion-item>
+        <ion-item ng-click="showLoginSupervisor()" href="#" ng-if="userDetail.role == 'ciudadano'">
+          Acceso a supervisores
+        </ion-item>
+        <ion-item ng-click="logout()" href="#">
+          Salir
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-popover-view>
+</script>
+
+<script id="terms.html" type="text/ng-template">
+  <p>Para hacer uso de la aplicación Baches App, Usted como usuario acepta la Política de Privacidad y Términos de Uso, así como recibir vía correo electrónico por conducto de Baches App información referente al uso, notificaciones y/o información referente a la demarcación en la cual este utilizando la aplicación. Baches App no revelará ni compartirá sus datos personales y/o de contacto con ningún tercero.</p>
+
+  <p>Términos de Uso de Baches App:</p>
+
+  <p>1) Esta aplicación así como sus componentes web son propiedad de Conservación y Tecnologías en Pavimentos, S.A. de C.V., empresa constituida y registrada legalmente en los Estados Unidos Mexicanos. La reproducción total o parcial así como la intrusión y/o modificaciones a las bases de datos del sistema por personas no autorizadas representan un abuso a la privacidad y propiedad intelectual por lo que se ejercerá acción legal en su contra.</p>
+  <p>2) Queda estrictamente prohibido la carga de imágenes no correspondientes al objetivo de la aplicación, de violencia, contenido sexual, de carácter ofensivo y, en general, que atenten contra la integridad de cualquier persona física o moral, representando esta situación un delito el cual será turnado a la autoridad competente.</p>
+  <p>3) El usuario que haga mal uso de ésta aplicación será bloqueado y sus datos personales podrán ser compartidos a las autoridades competentes en caso de iniciarse una investigación judicial. De igual forma, los datos de algún usuario podrán compartirse a alguna autoridad judicial siempre y cuando lo solicité mediante orden judicial.</p>
+  <p>4) En caso de detectar reportes falsos generados por el usuario en más de 5 ocasiones en un período de 7 días, éste será suspendido temporalmente.</p>
+  <p>5) La cobertura y funcionalidad de la aplicación estará habilitada de acuerdo a las demarcaciones que contraten el servicio.</p>
+  <p>6) La aplicación se encuentra disponible de forma gratuita para su descarga y uso en App Store® y Google® Play Store® para sistemas operativos iOS® y  Android® respectivamente y en ningún momento representará cargo alguno para el usuario.</p>
+</script>
+
+<script id="contacts.html" type="text/ng-template">
+  <p>contacto@bachesapp.com</p>
+</script>
+
+<script id="login_supervisor.html" type="text/ng-template">
+  <div class="list">
+    <label class="item item-input">
+      <i class="icon ion-person placeholder-icon"></i>
+      <input type="text" ng-model="supervisorLoginFormData.loginName" placeholder="Nombre de usuario" autocapitalize="off"
+        autocorrect="off">
+    </label>
+    <label class="item item-input">
+      <i class="icon ion-ios-locked placeholder-icon"></i>
+      <input type="password" ng-model="supervisorLoginFormData.password" placeholder="Contraseña" autocapitalize="off"
+        autocorrect="off">
+    </label>
+  </div>
+</script>
+
+<script id="cluster_detail.html" type="text/ng-template">
+  <span style="font-weight: bold;">{{selectedMarker.model.incident.place.title}}</span><br/>
+  <span>Reportes: {{selectedMarker.model.incident.incidents_count}} desde {{formatTs(selectedMarker.model.incident.focus_incident_created_ts)}}</span><br/>
+  <span>Status: {{formatSelectedClusterStatus()}} desde {{formatSelectedClusterStatusTs()}}</span><br/>
+  <p>&nbsp;</p>
+  <div>
+    <img style="max-width:100%; max-height:100%; display:block; margin:0 auto;" ng-src="{{getSelectedClusterPhotoUrl()}}"/>
+  </div>
+</script>
+
+<script id="offline_data.html" type="text/ng-template">
+  <div ng-if="offlineSubmitIncidents.length + offlineChangeIncidentStatuses.length == 0">
+    <span style="font-weight: bold;">No tiene datos guardados</span>
+  </div>
+
+  <ul class="list" ng-if="offlineSubmitIncidents.length + offlineChangeIncidentStatuses.length > 0">
+    <div class="item item-divider" ng-if="offlineSubmitIncidents.length > 0">
+      Reportes
+    </div>
+    <li class="item" ng-repeat="offlineSubmitIncident in offlineSubmitIncidents">
+      <span style="font-weight: bold;">{{offlineSubmitIncident.place.title}}</span>
+    </li>
+    <div class="item item-divider" ng-if="offlineChangeIncidentStatuses.length > 0">
+      Cambios
+    </div>
+    <li class="item" ng-repeat="offlineChangeIncidentStatus in offlineChangeIncidentStatuses">
+      <span style="font-weight: bold;">{{offlineChangeIncidentStatus.original_cluster.place.title}}</span><br/>
+      <span>Cambio status: {{formatStatus(offlineChangeIncidentStatus.original_cluster.status)}} a {{formatStatus(offlineChangeIncidentStatus.status)}}</span>
+    </li>
+  </ul>
+</script>
+
+<script id="cluster_type.html" type="text/ng-template">
+  <ion-list>
+    <ion-radio class="item-text-wrap" ng-model="params.selectedClusterType" ng-value="clusterType" ng-repeat="clusterType in clusterTypes">
+      {{clusterType.name}}
+    </ion-radio>
+  </ion-list>
+  <label class="item item-input">
+    <i class="icon ion-calculator placeholder-icon"></i>
+    <input type="number" ng-model="params.clusterLength" placeholder="Largo">
+  </label>
+  <label class="item item-input">
+    <i class="icon ion-calculator placeholder-icon"></i>
+    <input type="number" ng-model="params.clusterWidth" placeholder="Ancho">
+  </label>
+</script>
+
+<script id="repaired_detail.html" type="text/ng-template">
+  <ion-list>
+    <!--ion-radio class="item-text-wrap" ng-model="params.selectedMaterialType" ng-value="materialType" ng-repeat="materialType in materialTypes">
+      {{materialType.name}}
+    </ion-radio-->
+    <ion-item class="item-input">
+      <i class="icon ion-calculator placeholder-icon"></i>
+      <input type="number" ng-model="params.clusterArea" placeholder="Medida">
+    </ion-item class="item-input">
+  </ion-list>
+</script>
+
+
+<script id="motivo.html" type="text/ng-template">
+  <ion-list>
+    <!--ion-radio class="item-text-wrap" ng-model="params.selectedMaterialType" ng-value="materialType" ng-repeat="materialType in materialTypes">
+      {{materialType.name}}
+    </ion-radio-->
+    <ion-item class="item-input">
+      <i class="icon ion-pencil placeholder-icon"></i>
+      <input type="text" ng-model="params.motivo" placeholder="Motivo">
+    </ion-item class="item-input">
+  </ion-list>
+</script>
+
+<script id="map_control.html" type="text/ng-template" >
+  <div style="padding: 10px;" ng-click="emitDetectLocation()">
+    <img src="img/gps_icon.png"/>
+  </div>
+</script>
+
+<script id="socnet_links.html" type="text/ng-template">
+  <div class="list">
+    <ion-toggle ng-repeat="socnetLink in socnetLinks"
+      ng-model="socnetLink.active"
+      ng-change="socnetLinkChange(socnetLink)">
+      <img src="img/square-facebook-16.png" style="vertical-align: middle;"/><span style="vertical-align: middle;">&nbsp;&nbsp;{{ socnetLink.text }}</span>
+    </ion-toggle>
+  </div>
+</script>
+
+<script id="link.post_report_option.html" type="text/ng-template">
+  <div class="list">
+    <ion-toggle
+      ng-disabled="userDetail.role == 'supervisor'"
+      ng-model="takePhoto.active"
+      ng-checked="takePhoto.active">
+      Agregar foto
+    </ion-toggle>
+
+    <div class="item item-divider" ng-if="shareSocnets.length > 0 && userDetail.role == 'ciudadano'">
+      Compartir
+    </div>
+
+    <ion-toggle ng-repeat="shareSocnet in shareSocnets"
+      ng-model="shareSocnet.share"
+      ng-checked="shareSocnet.share"
+      ng-if="shareSocnets.length > 0"
+      ng-disabled="shareSocnet.disabled"
+      ng-change="socnetShareChange(shareSocnet)">
+      <img src="img/square-facebook-16.png" style="vertical-align: middle;"/><span style="vertical-align: middle;">&nbsp;&nbsp;{{ shareSocnet.text }}</span>
+    </ion-toggle>
+  </div>
+</script>

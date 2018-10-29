@@ -1,0 +1,223 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #387ef5 !default;
+$calm:                            #11c1f3 !default;
+$balanced:                        #33cd5f !default;
+$energized:                       #ffc900 !default;
+$assertive:                       #ef473a !default;
+$royal:                           #886aea !default;
+$dark:                            #444 !default;
+*/
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #777777 !default;
+$calm:                            #929292 !default;
+$balanced:                        #929292 !default;
+$energized:                       #c2c2c2 !default;
+$assertive:                       #787878 !default;
+$royal:                           #ffc900 !default;
+$dark:                            #444 !default;
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+
+// Include all of Ionic
+@import "www/lib/ionic/scss/ionic";
+
+.page-wrapper {
+  position:relative;
+  height: 100%;
+  width: 100%;
+}
+
+.page-element-wrapper {
+  position:relative;
+  /*height: 89%;*/
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.angular-google-map-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.bar-header {
+  height: 80px;
+  background-color: #454545;
+  vertical-align: middle;
+}
+
+.bar-subheader {
+  top: 80px;
+  height: 45px;
+  background-color: #a9a9a9 !important;
+}
+
+.bar-subheader .title {
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  height: 0px;
+  line-height: 0px;
+}
+
+.bar-header .title {
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  height: 80px;
+  line-height: 80px;
+}
+
+.has-header {
+  top: 80px;
+}
+
+.has-subheader {
+  top: 125px;
+  vertical-align:middle;
+}
+
+.page-title{
+  margin-top : -10px;
+  color: #ffffff;
+  font-size: 1.5em;
+}
+.page-sub-title{
+  margin-top: - 25px;
+  color: green;
+  font-size : .9em;
+}
+.custom-info-window{
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 10px;
+  /*border: 1px solid white;*/
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.7);
+  border-radius: 5px;
+  width: 200px;
+  margin-top: -100px;
+  margin-left: -50px;
+}
+.custom-info-window a{
+  color: white;
+  text-decoration: underline;
+}
+.custom-info-window:after
+{
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0 15px 15px;
+  border-color: rgba(0,0,0,0.7) transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+  top: -15px;
+  left: 35px;
+}
+
+.mi-mapa {
+  height: 84% !important;
+  display:block;
+  width: auto !important;
+
+}
+.scroll {
+  height:100% !important
+}
+
+.popup {
+  width: 94% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  color: black;
+}
+
+ion-popover-view.fit {
+  height: auto !important;
+}
+
+ion-popover-view.fit ion-content {
+  position: relative !important;
+}
+
+.platform-android ion-popover-view.fit {
+  margin-top: 10px !important;
+}
+
+.platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) {
+  height: 80px;
+  background-color: #575757 !important;
+}
+
+.platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) > * {
+  margin-top: 0px;
+}
+
+.platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) > .header-item {
+  margin-top: 0px;
+}
+
+.platform-ios.platform-cordova:not(.fullscreen) .has-header, .platform-ios.platform-cordova:not(.fullscreen) .bar-subheader {
+  top: 80px;
+}
+
+.platform-ios.platform-cordova:not(.fullscreen) .has-subheader {
+  top: 125px;
+}
+
+.nav-bar-title > img {
+  max-height: 90%;
+  max-width: 100%;
+}
+
+.platform-ios.platform-cordova:not(.fullscreen) .nav-bar-title > img {
+  max-height: 90%;
+  max-width: 100%;
+}
+
+.reportar-bache-bar {
+  background-color: #303030;
+  height: 11% !important;
+}
+
+.platform-ios.platform-cordova .reportar-bache-bar {
+  background-color: #3D3D3D;
+}
+
+.platform-ios.platform-cordova:not(.fullscreen) .reportar-bache-bar {
+  background-color: #3D3D3D;
+}
+
+input {
+  text-align: right;
+}
+
+.mhpopover {
+  height: 70% !important;
+  -webkit-box-shadow: inset 0px -7px 12px -2px rgba(0,0,0,0.25) !important;
+  -moz-box-shadow: inset 0px -7px 12px -2px rgba(0,0,0,0.25) !important;
+  box-shadow: inset 0px -7px 12px -2px rgba(0,0,0,0.25) !important;
+}

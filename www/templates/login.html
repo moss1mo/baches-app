@@ -1,0 +1,91 @@
+<ion-view>
+  <ion-nav-title>
+    <img src="img/header.png"/>
+  </ion-nav-title>
+  <ion-content class="has-header">
+    <div class="page-wrapper">
+      <div class="page-element-wrapper" style="height: 80% !important; padding-top: 5px !important;">
+        <div class="list list-inset">
+          <label class="item item-input">
+            <i class="icon ion-person placeholder-icon"></i>
+            <input type="text" ng-model="loginFormData.loginName" placeholder="Nombre de usuario" autocapitalize="off"
+              autocorrect="off">
+          </label>
+          <label class="item item-input">
+            <i class="icon ion-ios-locked placeholder-icon"></i>
+            <input type="password" ng-model="loginFormData.password" placeholder="Contraseña" autocapitalize="off"
+              autocorrect="off">
+          </label>
+        </div>
+        <img src="img/boton_signin.png" style="max-height: 50%; max-width: 100%; vertical-align:middle;" ng-click="loginCiudadano()"/>
+      </div>
+      <!-- 
+      <div class="page-element-wrapper hide-on-keyboard-open" style="background-color: #4d4d4d; height: 20% !important;">
+        <span class="helper"></span>
+        <img src="img/boton_nuevo.png" style="max-height: 50%; max-width: 100%; vertical-align:middle;" ng-click="showRegisterCiudadano()"/>
+      </div>-->
+    </div>
+  </ion-content>
+</ion-view>
+
+<script id="register_ciudadano.html" type="text/ng-template">
+  <ion-list>
+    <ion-item class="item-input">
+      <i class="icon ion-person placeholder-icon"></i>
+      <input type="email" ng-model="registrationFormData.email" placeholder="Nombre de usuario" autocapitalize="off"
+        autocorrect="off">
+    </ion-item>
+    <ion-item class="item-input">
+      <i class="icon ion-grid placeholder-icon"></i>
+      <input type="text" ng-model="registrationFormData.name" placeholder="Nombre completo"
+        autocorrect="off">
+    </ion-item>
+    <ion-item class="item item-input item-select">
+      <i class="icon ion-grid placeholder-icon"></i>
+      <div class="input-label">
+        &nbsp;
+      </div>
+      <select appearance="none" ng-model="selectedProvince" ng-options="prov.name for prov in provinces track by prov.id"
+        ng-change="selectedProvinceChanged(selectedProvince)" style="appearance: none!important; -webkit-appearance: none!important;">
+        <option value=""><span class="balanced">Elige estado</span></option>
+      </select>
+    </ion-item>
+    <ion-item class="item item-input item-select">
+      <i class="icon ion-grid placeholder-icon"></i>
+      <div class="input-label">
+        &nbsp;
+      </div>
+      <select appearance="none" ng-model="selectedMunicipality" ng-options="municipality.name for municipality in municipalities track by municipality.id"
+        ng-change="selectedMunicipalityChanged(selectedMunicipality)" style="appearance: none!important; -webkit-appearance: none!important;">
+        <option value=""><span class="balanced">Elige municipio</span></option>
+      </select>
+    </ion-item>
+    <ion-item class="item-input">
+      <i class="icon ion-ios-locked placeholder-icon"></i>
+      <input type="password" ng-model="registrationFormData.password" placeholder="Contraseña">
+    </ion-item>
+    <ion-item class="item-input">
+      <i class="icon ion-ios-locked placeholder-icon"></i>
+      <input type="password" ng-model="registrationFormData.passwordConfirmation" placeholder="Confirmar contraseña">
+    </ion-item>
+  </ion-list>
+</script>
+
+<script id="login.aviso_privacidad.html" type="text/ng-template">
+  <p>Para hacer uso de la aplicación Baches App, Usted como usuario acepta la Política de Privacidad y Términos de Uso, así como recibir vía correo electrónico por conducto de Baches App información referente al uso, notificaciones y/o información referente a la demarcación en la cual este utilizando la aplicación. Baches App no revelará ni compartirá sus datos personales y/o de contacto con ningún tercero.</p>
+
+  <p>Términos de Uso de Baches App:</p>
+
+  <p>1) Esta aplicación así como sus componentes web son propiedad de Conservación y Tecnologías en Pavimentos, S.A. de C.V., empresa constituida y registrada legalmente en los Estados Unidos Mexicanos. La reproducción total o parcial así como la intrusión y/o modificaciones a las bases de datos del sistema por personas no autorizadas representan un abuso a la privacidad y propiedad intelectual por lo que se ejercerá acción legal en su contra.</p>
+  <p>2) Queda estrictamente prohibido la carga de imágenes no correspondientes al objetivo de la aplicación, de violencia, contenido sexual, de carácter ofensivo y, en general, que atenten contra la integridad de cualquier persona física o moral, representando esta situación un delito el cual será turnado a la autoridad competente.</p>
+  <p>3) El usuario que haga mal uso de ésta aplicación será bloqueado y sus datos personales podrán ser compartidos a las autoridades competentes en caso de iniciarse una investigación judicial. De igual forma, los datos de algún usuario podrán compartirse a alguna autoridad judicial siempre y cuando lo solicité mediante orden judicial.</p>
+  <p>4) En caso de detectar reportes falsos generados por el usuario en más de 5 ocasiones en un período de 7 días, éste será suspendido temporalmente.</p>
+  <p>5) La cobertura y funcionalidad de la aplicación estará habilitada de acuerdo a las demarcaciones que contraten el servicio.</p>
+  <p>6) La aplicación se encuentra disponible de forma gratuita para su descarga y uso en App Store® y Google® Play Store® para sistemas operativos iOS® y  Android® respectivamente y en ningún momento representará cargo alguno para el usuario.</p>
+</script>
+
+<script id="login.usuario_registrado.html" type="text/ng-template">
+  <p>Su clave de usuario ha sido registrada.</p>
+
+  <p>Favor de revisar la bandeja de entrada de su correo y dar click en el enlace del correo que hemos enviado para validarla.</p>
+</script>

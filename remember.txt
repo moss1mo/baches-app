@@ -1,0 +1,3 @@
+Modify config.xml 70000
+Modify build.gradle last line
+http://stackoverflow.com/questions/5989237/generating-hash-key-for-app-using-facebook-sdk
